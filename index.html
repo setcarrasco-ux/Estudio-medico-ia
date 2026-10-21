@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#123b43">
+<meta name="description" content="Organiza guiones y proyectos de videos médicos educativos.">
+<link rel="manifest" href="manifest.json">
+<title>Estudio Médico IA</title>
+<style>
+:root{--ink:#17353b;--teal:#14545b;--mint:#e8f3f0;--paper:#f6f8f7;--line:#d7e3df;--muted:#62767a}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.45 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+header{background:var(--teal);color:white;padding:24px 18px 22px;border-radius:0 0 22px 22px}
+.brand{display:flex;align-items:center;gap:12px}.logo{width:48px;height:48px;border-radius:15px;background:#ffffff20;display:grid;place-items:center;font-size:25px}
+h1{font-size:21px;margin:0}header p{margin:4px 0 0;color:#d9e9e7;font-size:13px}
+main{max-width:720px;margin:auto;padding:16px;display:grid;gap:14px}
+.card{background:white;border:1px solid var(--line);border-radius:18px;padding:16px;box-shadow:0 3px 12px #183c3c08}
+h2{font-size:17px;margin:0 0 12px}label{display:block;font-weight:650;font-size:13px;margin:12px 0 6px}
+input,select,textarea{width:100%;font:inherit;color:var(--ink);background:white;border:1px solid #cbd9d5;border-radius:11px;padding:12px}
+textarea{min-height:86px;resize:vertical}
+button{font:inherit;font-weight:700;border:0;border-radius:12px;padding:12px 14px;cursor:pointer}
+.primary{background:var(--teal);color:white;width:100%;margin-top:14px}.secondary{background:var(--mint);color:var(--teal)}.danger{background:#fff0ed;color:#8c2e20}
+.note{font-size:12px;color:var(--muted);margin:9px 0 0}.row{display:flex;gap:8px;flex-wrap:wrap}.row button{flex:1}
+.project{border:1px solid var(--line);border-radius:12px;padding:12px;margin-top:9px}.project strong{display:block}.project small{color:var(--muted)}
+.output{white-space:pre-wrap;background:#f7faf9;border:1px solid var(--line);padding:12px;border-radius:12px;font-size:14px;min-height:60px}
+footer{text-align:center;color:var(--muted);font-size:12px;padding:0 20px 26px}
+.pill{display:inline-block;border-radius:99px;background:var(--mint);padding:4px 9px;color:var(--teal);font-size:11px;font-weight:700;margin-bottom:9px}
+</style>
+</head>
+<body>
+<header><div class="brand"><div class="logo">✚</div><div><h1>Estudio Médico IA</h1><p>Dr. Set Carrasco · Medicina interna y salud mental</p></div></div></header>
+<main>
+<section class="card">
+ <span class="pill">PROTOTIPO INICIAL · GRATIS</span>
+ <h2>Crear un proyecto de video</h2>
+ <label for="topic">Tema del video</label><textarea id="topic" placeholder="Ej.: señales de alarma de un infarto"></textarea>
+ <label for="area">Área</label><select id="area"><option>Medicina interna</option><option>Salud mental</option><option>Medicina y salud mental</option></select>
+ <label for="duration">Duración</label><select id="duration"><option value="30 segundos">30 segundos</option><option value="60 segundos" selected>60 segundos</option><option value="3 minutos">3 minutos</option></select>
+ <label for="tone">Estilo</label><select id="tone"><option>Educativo y cercano</option><option>Académico y científico</option><option>Preventivo y motivador</option></select>
+ <button class="primary" id="make">Preparar guion base</button>
+ <p class="note">El guion se genera localmente mediante una plantilla. No consulta internet ni sustituye la revisión médica.</p>
+</section>
+<section class="card">
+ <h2>Guion editable</h2>
+ <div id="script" class="output">Tu guion aparecerá aquí después de completar el tema.</div>
+ <div class="row" style="margin-top:10px"><button class="secondary" id="copy">Copiar guion</button><button class="secondary" id="save">Guardar proyecto</button></div>
+ <p class="note">Revisa los datos clínicos y añade referencias fiables antes de publicar.</p>
+</section>
+<section class="card">
+ <h2>Mis proyectos</h2>
+ <div id="projects"><p class="note">Todavía no hay proyectos guardados.</p></div>
+ <div class="row" style="margin-top:10px"><button class="secondary" id="export">Exportar copia JSON</button><button class="danger" id="clear">Borrar proyectos</button></div>
+ <p class="note">Los proyectos se guardan en el almacenamiento local de este navegador. Exporta una copia si vas a cambiar de navegador o teléfono.</p>
+</section>
+<section class="card">
+ <h2>Producción del avatar</h2>
+ <p>Esta primera versión organiza el contenido, pero todavía no genera el avatar hiperrealista. Para probarlo sin pagar:</p>
+ <ol>
+  <li>Prepara un guion breve y revísalo.</li>
+  <li>Graba tu voz en el teléfono, en un lugar silencioso.</li>
+  <li>Prueba un servicio de avatar con su cupo gratuito o una herramienta abierta compatible.</li>
+  <li>Importa el video a un editor gratuito para añadir subtítulos y formato vertical.</li>
+ </ol>
+ <div class="row"><button class="secondary" id="avatarTips">Ver lista para grabar fotos y voz</button></div>
+ <div id="tips" class="output" style="display:none;margin-top:10px">FOTOS: frontal, buena luz suave, rostro despejado, cámara a la altura de los ojos y fondo sencillo. Evita filtros y gafas con reflejos. VOZ: graba 1–3 minutos hablando con naturalidad, sin música ni ruido. Usa solo tu propia imagen y voz, y revisa las condiciones del servicio que elijas.</div>
+</section>
+</main>
+<footer>Prototipo local. No sube ni envía datos médicos. No introduzcas información identificable de pacientes.</footer>
+<script>
+const $=id=>document.getElementById(id);
+let currentScript='';
+const key='estudioMedicoIA.projects.v1';
+function buildScript(){
+ const topic=$('topic').value.trim(); if(!topic){alert('Escribe primero el tema del video.');return;}
+ const area=$('area').value,dur=$('duration').value,tone=$('tone').value;
+ const opening= tone==='Académico y científico'?'En este video revisaremos un punto importante sobre':'¿Sabías que entender esto puede ayudarte a cuidar mejor tu salud? Hoy hablaremos de';
+ currentScript=`TÍTULO: ${topic}\\nÁREA: ${area}\\nDURACIÓN OBJETIVO: ${dur}\\nESTILO: ${tone}\\n\\n[APERTURA]\\n${opening} ${topic}.\\n\\n[EXPLICACIÓN]\\nExplica la idea principal en lenguaje claro. Define los términos médicos necesarios y distingue lo que se conoce con buena evidencia de lo que depende de cada paciente.\\n\\n[QUÉ DEBE RECORDAR LA AUDIENCIA]\\n1. Presenta el mensaje clínico principal.\\n2. Explica qué acción segura puede tomar la persona.\\n3. Señala cuándo debe consultar a un profesional o buscar atención urgente, si corresponde al tema.\\n\\n[CIERRE]\\nLa información de este video es educativa y no reemplaza una evaluación médica individual. Comparte este contenido para promover decisiones informadas.\\n\\n[REVISIÓN ANTES DE PUBLICAR]\\n• Verificar datos, dosis y recomendaciones con fuentes clínicas actuales.\\n• Añadir referencias confiables y fecha de revisión.\\n• Evitar prometer diagnósticos o tratamientos universales.\\n• Ajustar la extensión al tiempo real de lectura.`;
+ $('script').textContent=currentScript;
+}
+function getProjects(){try{return JSON.parse(localStorage.getItem(key)||'[]')}catch(e){return []}}
+function setProjects(p){localStorage.setItem(key,JSON.stringify(p));render()}
+function render(){const p=getProjects();$('projects').innerHTML=p.length?p.map((x,i)=>`<div class="project"><strong>${escapeHtml(x.topic)}</strong><small>${escapeHtml(x.area)} · ${escapeHtml(x.duration)} · ${escapeHtml(x.date)}</small><div class="row" style="margin-top:8px"><button class="secondary" data-open="${i}">Abrir</button><button class="danger" data-delete="${i}">Eliminar</button></div></div>`).join(''):'<p class="note">Todavía no hay proyectos guardados.</p>'}
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+$('make').onclick=buildScript;
+$('copy').onclick=async()=>{if(!currentScript){alert('Primero prepara un guion.');return}try{await navigator.clipboard.writeText(currentScript);alert('Guion copiado.')}catch(e){alert('No se pudo copiar automáticamente. Mantén pulsado el texto para copiarlo.')}};
+$('save').onclick=()=>{if(!currentScript){alert('Primero prepara un guion.');return}const p=getProjects();p.unshift({topic:$('topic').value.trim(),area:$('area').value,duration:$('duration').value,tone:$('tone').value,script:currentScript,date:new Date().toLocaleDateString('es-PE')});setProjects(p);alert('Proyecto guardado en este navegador.')};
+$('projects').onclick=e=>{const oi=e.target.dataset.open,di=e.target.dataset.delete;if(oi!==undefined){const p=getProjects()[Number(oi)];$('topic').value=p.topic;$('area').value=p.area;$('duration').value=p.duration;$('tone').value=p.tone;currentScript=p.script;$('script').textContent=currentScript;window.scrollTo({top:0,behavior:'smooth'})}if(di!==undefined&&confirm('¿Eliminar este proyecto?')){const p=getProjects();p.splice(Number(di),1);setProjects(p)}};
+$('export').onclick=()=>{const blob=new Blob([JSON.stringify(getProjects(),null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='mis-proyectos-medicos.json';a.click();URL.revokeObjectURL(a.href)};
+$('clear').onclick=()=>{if(confirm('¿Borrar todos los proyectos guardados en este navegador?')){localStorage.removeItem(key);render()}};
+$('avatarTips').onclick=()=>{$('tips').style.display=$('tips').style.display==='none'?'block':'none'};
+if('serviceWorker' in navigator && location.protocol.startsWith('http'))navigator.serviceWorker.register('./sw.js').catch(()=>{});
+render();
+</script>
+</body></html>

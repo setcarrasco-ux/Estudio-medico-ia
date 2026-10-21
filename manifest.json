@@ -1,0 +1,10 @@
+{
+  "name": "Estudio Médico IA",
+  "short_name": "Estudio Médico",
+  "description": "Organiza guiones y proyectos de videos médicos educativos",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#f6f8f7",
+  "theme_color": "#123b43",
+  "icons": []
+}
